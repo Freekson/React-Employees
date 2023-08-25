@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Layout } from "../../components/Layout";
 import { Card, Form, Row, Space, Typography } from "antd";
 import { CustumInput } from "../../components/CustomInput";
@@ -6,39 +6,27 @@ import { PasswordInput } from "../../components/PasswordInput";
 import { CustomButton } from "../../components/CustomButton";
 import { Link } from "react-router-dom";
 import { Path } from "../../paths";
-import { UserData, useLoginMutation } from "../../redux/services/auth";
-import { isErrorWithMessage } from "../../utils/isErrorWithMessage";
 
-export const Login: React.FC = () => {
-  const [loginUser, loginUserResult] = useLoginMutation();
-  const [error, setError] = useState("");
-
-  const login = async (data: UserData) => {
-    try {
-      await loginUser(data).unwrap();
-    } catch (err) {
-      const mayBeError = isErrorWithMessage(err);
-      if (mayBeError) {
-        setError(err.data.message);
-      } else {
-        setError("Unkown error");
-      }
-    }
-  };
+export const Register: React.FC = () => {
   return (
     <Layout>
       <Row align="middle" justify="center">
-        <Card title="Enter" style={{ width: "30rem", marginTop: "5rem" }}>
-          <Form onFinish={login}>
+        <Card title="Register" style={{ width: "30rem", marginTop: "2rem" }}>
+          <Form onFinish={() => null}>
+            <CustumInput name="name" placeholder="Name" />
             <CustumInput name="email" type="email" placeholder="Email" />
             <PasswordInput name="password" placeholder="Password" />
+            <PasswordInput
+              name="confirmPassword"
+              placeholder="Confirm password"
+            />
             <CustomButton type="primary" htmlType="submit">
-              Login
+              Register
             </CustomButton>
           </Form>
           <Space direction="vertical" size="large">
             <Typography.Text>
-              Don't have an account? <Link to={Path.register}>Register</Link>
+              Have an account? <Link to={Path.login}>Login</Link>
             </Typography.Text>
           </Space>
         </Card>
