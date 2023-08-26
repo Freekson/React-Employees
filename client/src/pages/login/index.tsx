@@ -4,18 +4,21 @@ import { Card, Form, Row, Space, Typography } from "antd";
 import { CustumInput } from "../../components/CustomInput";
 import { PasswordInput } from "../../components/PasswordInput";
 import { CustomButton } from "../../components/CustomButton";
-import { Link } from "react-router-dom";
+import { ErrorMessage } from "../../components/ErrorMessage";
+import { Link, useNavigate } from "react-router-dom";
 import { Path } from "../../paths";
 import { UserData, useLoginMutation } from "../../redux/services/auth";
 import { isErrorWithMessage } from "../../utils/isErrorWithMessage";
 
 export const Login: React.FC = () => {
-  const [loginUser, loginUserResult] = useLoginMutation();
+  const navigate = useNavigate();
+  const [loginUser] = useLoginMutation();
   const [error, setError] = useState("");
 
   const login = async (data: UserData) => {
     try {
       await loginUser(data).unwrap();
+      navigate("/");
     } catch (err) {
       const mayBeError = isErrorWithMessage(err);
       if (mayBeError) {
@@ -40,6 +43,7 @@ export const Login: React.FC = () => {
             <Typography.Text>
               Don't have an account? <Link to={Path.register}>Register</Link>
             </Typography.Text>
+            <ErrorMessage message={error} />
           </Space>
         </Card>
       </Row>
