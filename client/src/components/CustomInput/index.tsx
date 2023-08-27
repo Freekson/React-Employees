@@ -7,7 +7,7 @@ type TProps = {
   type?: string;
 };
 
-export const CustumInput: React.FC<TProps> = ({
+export const CustomInput: React.FC<TProps> = ({
   name,
   placeholder,
   type = "text",

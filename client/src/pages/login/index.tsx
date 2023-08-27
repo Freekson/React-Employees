@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Layout } from "../../components/Layout";
 import { Card, Form, Row, Space, Typography } from "antd";
-import { CustumInput } from "../../components/CustomInput";
+import { CustomInput } from "../../components/CustomInput";
 import { PasswordInput } from "../../components/PasswordInput";
 import { CustomButton } from "../../components/CustomButton";
 import { ErrorMessage } from "../../components/ErrorMessage";
@@ -33,7 +33,7 @@ export const Login: React.FC = () => {
       <Row align="middle" justify="center">
         <Card title="Enter" style={{ width: "30rem", marginTop: "5rem" }}>
           <Form onFinish={login}>
-            <CustumInput name="email" type="email" placeholder="Email" />
+            <CustomInput name="email" type="email" placeholder="Email" />
             <PasswordInput name="password" placeholder="Password" />
             <CustomButton type="primary" htmlType="submit">
               Login
